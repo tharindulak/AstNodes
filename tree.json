@@ -1,0 +1,197 @@
+{
+  "root": "BLagNode",
+  "node": [
+    {
+      "name": "AstNode",
+      "type": "abstract",
+      "field": [
+        {
+          "name": "missingFlagValue",
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "IdentifierNode",
+      "ext": "AstNode",
+      "field": [
+        {
+          "name": "identifier",
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "KeywordNode",
+      "ext": "AstNode",
+      "field": [
+        {
+          "name": "keyword",
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "OtherTokenNode",
+      "ext": "AstNode",
+      "field": [
+        {
+          "name": "tokenValue",
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "OperatorNode",
+      "ext": "AstNode",
+      "field": [
+        {
+          "name": "operator",
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "RequiredParamNode",
+      "ext": "AstNode",
+      "field": [
+        {
+          "name": "publicKeyword",
+          "type": "KeywordNode"
+        },
+        {
+          "name": "typeDescriptor",
+          "type": "String"
+        },
+        {
+          "name": "paramName",
+          "type": "IdentifierNode"
+        }
+      ]
+    },
+    {
+      "name": "CommaSeparatedRequiredParamNode",
+      "ext": "AstNode",
+      "field": [
+        {
+          "name": "comma",
+          "type": "OtherTokenNode"
+        },
+        {
+          "name": "requiredParam",
+          "type": "RequiredParamNode"
+        }
+      ]
+    },
+    {
+      "name": "RequiredParamsNode",
+      "ext": "AstNode",
+      "field": [
+        {
+          "name": "requiredParam",
+          "type": "RequiredParamNode"
+        },
+        {
+          "name": "requiredParamList",
+          "type": "List<CommaSeparatedRequiredParamNode>"
+        }
+      ]
+    },
+    {
+      "name": "StatementNode",
+      "ext": "AstNode"
+    },
+    {
+      "name": "LocalInitVarDeclStmtNode",
+      "ext": "StatementNode",
+      "field": [
+        {
+          "name": "finalKeyword",
+          "type": "KeywordNode"
+        },
+        {
+          "name": "typeBindingPattern",
+          "type": "String"
+        },
+        {
+          "name": "paramName",
+          "type": "IdentifierNode"
+        },
+        {
+          "name": "assignmentOperator",
+          "type": "OperatorNode"
+        },
+        {
+          "name": "literal",
+          "type": "int"
+        },
+        {
+          "name": "semicolon",
+          "type": "OtherTokenNode"
+        }
+      ]
+    },
+    {
+      "name": "LocalVarDeclStmtNode",
+      "ext": "AstNode",
+      "field": [
+        {
+          "name": "localInitVarDeclStmtNode",
+          "type": "LocalInitVarDeclStmtNode"
+        }
+      ]
+    },
+    {
+      "name": "FunctionBodyNode",
+      "ext": "StatementNode",
+      "field": [
+        {
+          "name": "localVarDeclStmt",
+          "type": "LocalVarDeclStmtNode"
+        }
+      ]
+    },
+    {
+      "name": "FunctionDefinitionNode",
+      "ext": "AstNode",
+      "field": [
+        {
+          "name": "visibility",
+          "type": "KeywordNode"
+        },
+        {
+          "name": "functionKeyword",
+          "type": "KeywordNode"
+        },
+        {
+          "name": "functionName",
+          "type": "IdentifierNode"
+        },
+        {
+          "name": "startBracket",
+          "type": "OtherTokenNode"
+        },
+        {
+          "name": "requiredParams",
+          "type": "RequiredParamsNode"
+        },
+        {
+          "name": "endBracket",
+          "type": "OtherTokenNode"
+        },
+        {
+          "name": "beginParenthesis",
+          "type": "OtherTokenNode"
+        },
+        {
+          "name": "functionBody",
+          "type": "FunctionBodyNode"
+        },
+        {
+          "name": "endParenthesis",
+          "type": "OtherTokenNode"
+        }
+      ]
+    }
+  ]
+}
