@@ -3,6 +3,7 @@ package model;
 public class Field {
     private String name;
     private String type;
+    private Object defaultValue;
 
     public String getName() {
         return name;
@@ -18,5 +19,13 @@ public class Field {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Object getDefaultValue() {
+        return defaultValue;
+    }
+
+    public void setDefaultValue(Object defaultValue) {
+        this.defaultValue = defaultValue;
     }
 }
