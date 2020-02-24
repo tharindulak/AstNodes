@@ -2,7 +2,6 @@ package gen;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Test {
     public static void main(String[] args) {
@@ -14,16 +13,18 @@ public class Test {
         gen.LocalVarDeclStmtNode localVarDeclStmtNode = new gen.LocalVarDeclStmtNode(localInitVarDeclStmtNode);
         gen.FunctionBodyNode functionBody = new gen.FunctionBodyNode(localVarDeclStmtNode);
         gen.IdentifierNode p = new gen.IdentifierNode("p");
+        gen.IdentifierNode r = new gen.IdentifierNode("r");
         gen.KeywordNode publicKeyword = new gen.KeywordNode("public");
-        gen.RequiredParamNode requiredParamNodeP = new gen.RequiredParamNode(publicKeyword, "int", p);
         gen.IdentifierNode q = new gen.IdentifierNode("q");
+        gen.RequiredParamNode requiredParamNodeP = new gen.RequiredParamNode(publicKeyword, "int", p);
         gen.RequiredParamNode requiredParamNodeQ = new gen.RequiredParamNode(publicKeyword, "int", q);
+        gen.RequiredParamNode requiredParamNodeR = new gen.RequiredParamNode(publicKeyword, "int", r);
         gen.OtherTokenNode comma = new gen.OtherTokenNode(",");
         gen.CommaSeparatedRequiredParamNode commaSeparatedQ = new gen.CommaSeparatedRequiredParamNode(comma, requiredParamNodeQ);
-        gen.CommaSeparatedRequiredParamNode commaSeparatedP = new gen.CommaSeparatedRequiredParamNode(comma, requiredParamNodeP);
+        gen.CommaSeparatedRequiredParamNode commaSeparatedR = new gen.CommaSeparatedRequiredParamNode(comma, requiredParamNodeR);
         List<gen.CommaSeparatedRequiredParamNode> commaSeparatedRequiredParamNodes = new ArrayList<>();
-        commaSeparatedRequiredParamNodes.add(commaSeparatedP);
         commaSeparatedRequiredParamNodes.add(commaSeparatedQ);
+        commaSeparatedRequiredParamNodes.add(commaSeparatedR);
         gen.RequiredParamsNode requiredParamsNode = new gen.RequiredParamsNode(requiredParamNodeP, commaSeparatedRequiredParamNodes);
         gen.KeywordNode functionKeyword = new gen.KeywordNode("function");
         gen.IdentifierNode functionName = new gen.IdentifierNode("hello");

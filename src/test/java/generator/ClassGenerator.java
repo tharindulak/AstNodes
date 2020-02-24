@@ -1,7 +1,6 @@
 package gen;
 
 import com.google.gson.Gson;
-import javafx.scene.SnapshotParametersBuilder;
 import model.Field;
 import model.Node;
 import model.Tree;
@@ -22,7 +21,6 @@ public class ClassGenerator {
     private static final String OPEN_BRACKETS = "(";
     private static final String CLOSE_BRACKETS = ")";
     private static final String OPEN_PARENTHESIS = "{";
-    private static final String COMMA = ",";
     private static final String NEW_LINE = "\n";
     private static final String THIS_KEYWORD = "this";
     private static final String DOT = ".";
@@ -46,10 +44,6 @@ public class ClassGenerator {
     private static final String GEN_WHITESPACE = "\" \"";
     private static final String LIST_KEYWORD = "List";
     private static final String LIST_IMPORT_STRING = "import java.util.List;";
-    private static final String SUB_STRING_KEYWORD = "substring";
-    private static final String LENGTH_METHOD = "length()";
-    private static final String MINUS = "-";
-    private static final String ONE = "1";
     private static final String LIST_ITERATOR_FUNCTION = "StringBuilder <builderName> = new StringBuilder();" +
             "\nfor (<Type> var: <ListName>) {\n<builderName>.append(var).append(\" \");}";
     private static final String TYPE_REGEX = "<Type>";
@@ -64,17 +58,17 @@ public class ClassGenerator {
         try {
             initTreeComponents();
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         for (Node node : nodes) {
             StringBuilder generateClass = new StringBuilder();
-            if (node.getField() != null) {
-                generateClass.append(generateImports(node.getField()))
+            if (node.getFields() != null) {
+                generateClass.append(generateImports(node.getFields()))
                         .append(buildClassName(node))
-                        .append(defineAttributes(node.getField()))
+                        .append(defineAttributes(node.getFields()))
                         .append(buildDefaultConstructor(node.getName()))
-                        .append(buildParameterizedConstructor(node.getName(), node.getField()))
-                        .append(createToStringMethod(node.getField()))
+                        .append(buildParameterizedConstructor(node.getName(), node.getFields()))
+                        .append(createToStringMethod(node.getFields()))
                         .append(NEW_LINE).append(CLOSE_PARENTHESIS).append(NEW_LINE).append(NEW_LINE);
             } else {
                 generateClass.append(buildClassName(node))
@@ -85,7 +79,7 @@ public class ClassGenerator {
             try {
                 writeToFile(generateClass.toString(), "src/main/java/" + node.getName() + DOT + JAVA_EXT);
             } catch (IOException e) {
-                System.out.println(e);
+                e.printStackTrace();
             }
         }
 //        System.out.println(generatedClasses);
@@ -199,7 +193,7 @@ public class ClassGenerator {
 //                            .append(OPEN_BRACKETS).append(ONE).append(COMMA).append(field.getName()).append(DOT)
 //                            .append(TO_STRING_SIGNATURE).append(OPEN_BRACKETS).append(CLOSE_BRACKETS).append(DOT)
 //                            .append(LENGTH_METHOD).append(MINUS).append(ONE).append(CLOSE_BRACKETS);
-                    toStringText.append(field.getName() + BUILDER);
+                    toStringText.append(field.getName()).append(BUILDER);
                 } else {
                     toStringText.append(field.getName()).append(DOT).append(TO_STRING_SIGNATURE)
                             .append(OPEN_BRACKETS + CLOSE_BRACKETS);
@@ -212,7 +206,8 @@ public class ClassGenerator {
                     toStringText.append(CONCAT_SYMBOL).append(GEN_WHITESPACE).append(CONCAT_SYMBOL)
                             .append(field.getName()).append(WHITE_SPACE);
                 } else if (field.getType().contains(LIST_KEYWORD)) {
-                    toStringText.append(CONCAT_SYMBOL).append(GEN_WHITESPACE).append(CONCAT_SYMBOL).append(field.getName() + BUILDER);
+                    toStringText.append(CONCAT_SYMBOL).append(GEN_WHITESPACE).append(CONCAT_SYMBOL)
+                            .append(field.getName()).append(BUILDER);
 //                            .append(field.getName()).append(DOT).append(TO_STRING_SIGNATURE)
 //                            .append(OPEN_BRACKETS).append(CLOSE_BRACKETS).append(DOT).append(SUB_STRING_KEYWORD)
 //                            .append(OPEN_BRACKETS).append(ONE).append(COMMA).append(field.getName()).append(DOT)
