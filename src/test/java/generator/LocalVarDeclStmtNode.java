@@ -1,4 +1,4 @@
-package gen;
+package generator;
 
 public class LocalVarDeclStmtNode extends AstNode{
 private LocalInitVarDeclStmtNode localInitVarDeclStmtNode;

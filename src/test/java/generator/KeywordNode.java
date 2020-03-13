@@ -1,4 +1,4 @@
-package gen;
+package generator;
 
 public class KeywordNode extends AstNode{
 private String keyword;

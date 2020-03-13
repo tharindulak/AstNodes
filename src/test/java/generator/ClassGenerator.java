@@ -1,4 +1,4 @@
-package gen;
+package generator;
 
 import com.google.gson.Gson;
 import model.Field;
@@ -110,8 +110,8 @@ public class ClassGenerator {
             generatedClassName.append(ABSTRACT_CLASS).append(WHITE_SPACE).append(node.getName());
         }
         // Check for parent classes
-        if (node.getExt() != null) {
-            generatedClassName.append(WHITE_SPACE).append(EXTENDS_KEYWORD).append(WHITE_SPACE).append(node.getExt());
+        if (node.getBase() != null) {
+            generatedClassName.append(WHITE_SPACE).append(EXTENDS_KEYWORD).append(WHITE_SPACE).append(node.getBase());
         }
         generatedClassName.append(OPEN_PARENTHESIS).append(NEW_LINE);
         return generatedClassName.toString();

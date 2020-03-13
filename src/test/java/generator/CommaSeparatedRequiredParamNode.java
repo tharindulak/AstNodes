@@ -1,4 +1,4 @@
-package gen;
+package generator;
 
 public class CommaSeparatedRequiredParamNode extends AstNode {
     private OtherTokenNode comma;

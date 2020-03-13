@@ -1,4 +1,4 @@
-package gen;
+package generator;
 
 public class FunctionBodyNode extends StatementNode{
 private LocalVarDeclStmtNode localVarDeclStmt;

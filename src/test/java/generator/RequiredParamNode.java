@@ -1,4 +1,4 @@
-package gen;
+package generator;
 
 public class RequiredParamNode extends AstNode {
     private KeywordNode publicKeyword;

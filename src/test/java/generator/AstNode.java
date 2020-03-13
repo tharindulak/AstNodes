@@ -1,4 +1,4 @@
-package gen;
+package generator;
 
 public abstract class AstNode{
 private String missingFlagValue;

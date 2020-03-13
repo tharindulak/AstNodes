@@ -1,4 +1,4 @@
-package gen;
+package generator;
 
 public class LocalInitVarDeclStmtNode extends StatementNode{
 private KeywordNode finalKeyword;

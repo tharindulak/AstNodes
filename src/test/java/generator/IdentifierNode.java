@@ -1,4 +1,4 @@
-package gen;
+package generator;
 
 public class IdentifierNode extends AstNode{
 private String identifier;

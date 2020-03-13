@@ -1,4 +1,4 @@
-package gen;
+package generator;
 
 public class FunctionDefinitionNode extends AstNode{
 private KeywordNode visibility;

@@ -1,4 +1,4 @@
-package gen;
+package generator;
 
 public class OperatorNode extends AstNode{
 private String operator;

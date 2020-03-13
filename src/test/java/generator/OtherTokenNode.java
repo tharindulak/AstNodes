@@ -1,4 +1,4 @@
-package gen;
+package generator;
 
 public class OtherTokenNode extends AstNode{
 private String tokenValue;
