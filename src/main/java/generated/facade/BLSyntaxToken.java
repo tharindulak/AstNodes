@@ -1,12 +1,14 @@
 package generated.facade;
 import generated.internal.SyntaxNode;
-public class BLSyntaxToken extends BLNonTerminalNode{
-  BLNode leadingTrivia;
-  BLNode trailingTrivia;
+
+public  class BLSyntaxToken extends BLNonTerminalNode{
+BLNode leadingTrivia;
+BLNode trailingTrivia;
 
 public BLSyntaxToken(SyntaxNode node, int position, BLNonTerminalNode parent) {
 super(node, position, parent);
 }
+
 public BLNode leadingTrivia() {
 if (leadingTrivia != null) {
 return leadingTrivia;
@@ -28,7 +30,6 @@ case 0:
 return leadingTrivia();
 case 1:
 return trailingTrivia();
-
 }
 return null;
 }

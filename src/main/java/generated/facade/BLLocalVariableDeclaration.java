@@ -1,15 +1,17 @@
 package generated.facade;
 import generated.internal.SyntaxNode;
-public class BLLocalVariableDeclaration extends BLNonTerminalNode{
-  BLSyntaxToken typeName;
-  BLSyntaxToken variableName;
-  BLSyntaxToken equalsToken;
-  BLNode initializer;
-  BLSyntaxToken semicolonToken;
+
+public  class BLLocalVariableDeclaration extends BLNonTerminalNode{
+BLSyntaxToken typeName;
+BLSyntaxToken variableName;
+BLSyntaxToken equalsToken;
+BLNode initializer;
+BLSyntaxToken semicolonToken;
 
 public BLLocalVariableDeclaration(SyntaxNode node, int position, BLNonTerminalNode parent) {
 super(node, position, parent);
 }
+
 public BLSyntaxToken typeName() {
 if (typeName != null) {
 return typeName;
@@ -58,7 +60,6 @@ case 3:
 return initializer();
 case 4:
 return semicolonToken();
-
 }
 return null;
 }

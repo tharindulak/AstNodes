@@ -15,11 +15,11 @@
     {
       "name": "StatementNode",
       "type": "abstract",
-      "ext": "SyntaxNode"
+      "base": "SyntaxNode"
     },
     {
       "name": "SyntaxToken",
-      "ext": "SyntaxNode",
+      "base": "SyntaxNode",
       "fields": [
         {
           "name": "leadingTrivia",
@@ -33,7 +33,7 @@
     },
     {
       "name": "ModulePart",
-      "ext": "SyntaxNode",
+      "base": "SyntaxNode",
       "fields": [
         {
           "name": "importList",
@@ -51,7 +51,7 @@
     },
     {
       "name": "LiteralValueToken",
-      "ext": "SyntaxToken",
+      "base": "SyntaxToken",
       "fields": [
         {
           "name": "text",
@@ -61,7 +61,7 @@
     },
     {
       "name": "IdentifierToken",
-      "ext": "SyntaxToken",
+      "base": "SyntaxToken",
       "fields": [
         {
           "name": "text",
@@ -71,7 +71,7 @@
     },
     {
       "name": "MissingToken",
-      "ext": "SyntaxToken",
+      "base": "SyntaxToken",
       "fields": [
         {
           "name": "IS_MISSING",
@@ -81,36 +81,8 @@
       ]
     },
     {
-      "name": "SyntaxTrivia",
-      "ext": "SyntaxNode",
-      "fields": [
-        {
-          "name": "text",
-          "type": "String"
-        }
-      ]
-    },
-    {
-      "name": "SyntaxToken",
-      "ext": "SyntaxNode",
-      "fields": [
-        {
-          "name": "leadingTrivia",
-          "type": "SyntaxNode"
-        },
-        {
-          "name": "trailingTrivia",
-          "type": "SyntaxNode"
-        }
-      ]
-    },
-    {
-      "name": "StatementNode",
-      "ext": "SyntaxNode"
-    },
-    {
       "name": "BlockStatement",
-      "ext": "StatementNode",
+      "base": "StatementNode",
       "fields": [
         {
           "name": "openBraceToken",
@@ -128,7 +100,7 @@
     },
     {
       "name": "LocalVariableDeclaration",
-      "ext": "SyntaxNode",
+      "base": "SyntaxNode",
       "fields": [
         {
           "name": "typeName",
@@ -154,7 +126,7 @@
     },
     {
       "name": "FunctionDefinition",
-      "ext": "SyntaxNode",
+      "base": "SyntaxNode",
       "fields": [
         {
           "name": "visibilityQual",
@@ -184,7 +156,7 @@
     },
     {
       "name": "ImportDeclaration",
-      "ext": "SyntaxNode"
+      "base": "SyntaxNode"
     }
   ]
 }

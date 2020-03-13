@@ -1,0 +1,32 @@
+{{package}}
+{{imports}}
+
+public {{abstract}} class {{className}}{{type}} {{relationship}} {{parentClass}}{
+{{#attributes}}{{type}} {{name}};
+{{/attributes}}
+
+public {{className}}(SyntaxNode node, int position, BLNonTerminalNode parent) {
+super(node, position, parent);
+}
+
+{{#attributeFunction}}public {{returnObject}} {{name}}() {
+if ({{name}} != null) {
+return {{name}};
+}
+{{name}} = {{parentMethod}}({{index}}){{#createFacadeCall}}.createFacade(getChildPosition({{index}}), this){{/createFacadeCall}};
+return {{name}};
+}
+{{/attributeFunction}}
+
+{{#switchFunction}}
+public BLNode childInBucket(int bucket) {
+switch (bucket) {
+{{#caseList}}
+case {{index}}:
+return {{name}}();
+{{/caseList}}
+}
+return null;
+}
+{{/switchFunction}}
+}

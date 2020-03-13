@@ -1,13 +1,15 @@
 package generated.facade;
 import generated.internal.SyntaxNode;
-public class BLBlockStatement extends BLNonTerminalNode{
-  BLSyntaxToken openBraceToken;
-  BLNodeList<BLNode> statementList;
-  BLSyntaxToken closeBraceToken;
+
+public  class BLBlockStatement extends BLNonTerminalNode{
+BLSyntaxToken openBraceToken;
+BLNodeList<BLNode> statementList;
+BLSyntaxToken closeBraceToken;
 
 public BLBlockStatement(SyntaxNode node, int position, BLNonTerminalNode parent) {
 super(node, position, parent);
 }
+
 public BLSyntaxToken openBraceToken() {
 if (openBraceToken != null) {
 return openBraceToken;
@@ -38,7 +40,6 @@ case 1:
 return statementList();
 case 2:
 return closeBraceToken();
-
 }
 return null;
 }

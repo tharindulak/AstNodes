@@ -1,16 +1,18 @@
 package generated.facade;
 import generated.internal.SyntaxNode;
-public class BLFunctionDefinition extends BLNonTerminalNode{
-  BLSyntaxToken visibilityQual;
-  BLSyntaxToken functionKeyword;
-  BLSyntaxToken functionName;
-  BLSyntaxToken openParenToken;
-  BLSyntaxToken closeParenToken;
-  BLNode functionBody;
+
+public  class BLFunctionDefinition extends BLNonTerminalNode{
+BLSyntaxToken visibilityQual;
+BLSyntaxToken functionKeyword;
+BLSyntaxToken functionName;
+BLSyntaxToken openParenToken;
+BLSyntaxToken closeParenToken;
+BLNode functionBody;
 
 public BLFunctionDefinition(SyntaxNode node, int position, BLNonTerminalNode parent) {
 super(node, position, parent);
 }
+
 public BLSyntaxToken visibilityQual() {
 if (visibilityQual != null) {
 return visibilityQual;
@@ -68,7 +70,6 @@ case 4:
 return closeParenToken();
 case 5:
 return functionBody();
-
 }
 return null;
 }

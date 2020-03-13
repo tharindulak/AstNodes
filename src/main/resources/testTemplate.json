@@ -1,0 +1,9 @@
+{
+  blogs: [
+    title: {
+      story: {
+        name: "Handlebars.java rocks!"
+      }
+    }
+  ]
+}

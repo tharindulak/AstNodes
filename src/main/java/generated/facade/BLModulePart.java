@@ -1,13 +1,15 @@
 package generated.facade;
 import generated.internal.SyntaxNode;
-public class BLModulePart extends BLNonTerminalNode{
-  BLNodeList<BLNode> importList;
-  BLNodeList<BLNode> memberList;
-  BLSyntaxToken eofToken;
+
+public  class BLModulePart extends BLNonTerminalNode{
+BLNodeList<BLNode> importList;
+BLNodeList<BLNode> memberList;
+BLSyntaxToken eofToken;
 
 public BLModulePart(SyntaxNode node, int position, BLNonTerminalNode parent) {
 super(node, position, parent);
 }
+
 public BLNodeList<BLNode> importList() {
 if (importList != null) {
 return importList;
@@ -38,7 +40,6 @@ case 1:
 return memberList();
 case 2:
 return eofToken();
-
 }
 return null;
 }

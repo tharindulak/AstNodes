@@ -4,10 +4,5 @@ public $abstract class $className$type $relationship $parentClass{
 $attributes
 $constructors
 $facadeMember
-public BLNode childInBucket(int bucket) {
-switch (bucket) {
-$caseStatements
-}
-return null;
-}
+$childFunction
 }
