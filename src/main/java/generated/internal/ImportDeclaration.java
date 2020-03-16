@@ -5,14 +5,10 @@ public  class ImportDeclaration extends SyntaxNode{
 
 public ImportDeclaration(SyntaxKind kind ){
 super(kind );
-this.bucketCount = 6;
-this.childBuckets = new SyntaxNode[6];
 }
 
 public ImportDeclaration(SyntaxKind kind, int width ) {
 super(kind, width );
-this.bucketCount = 6;
-this.childBuckets = new SyntaxNode[6];
 }
 
 
