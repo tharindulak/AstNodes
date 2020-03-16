@@ -9,7 +9,6 @@ import model.Field;
 import model.Node;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +18,29 @@ public class FacadeGenerator {
     private static List<Field> currentFieldList;
     private static List<AttributeFunction> attributeFunctionList;
     private static SwitchFunction switchFunction;
+
+    static class SwitchFunction {
+        List<Case> caseList;
+        SwitchFunction(List<Case> caseList) {
+            this.caseList = caseList;
+        }
+    }
+
+    static class Case {
+        String name;
+        int index;
+        Case(String name, int index){
+            this.name = name;
+            this.index = index;
+        }
+    }
+
+    static class CreateFacadeCall {
+        int index;
+        CreateFacadeCall(int index) {
+            this.index = index;
+        }
+    }
 
     static class AttributeFunction {
         String returnObject;
@@ -39,6 +61,27 @@ public class FacadeGenerator {
             this.index = index;
             this.createFacadeCall = createFacadeCall;
         }
+    }
+
+    /**
+     * This is used to represent the attributes block in handlebar template. The attributes block will be
+     * replaced by the returned attributes list.
+     * @return returns the currentFieldList in a node
+     */
+    public List<Field> attributes() {
+        return currentFieldList;
+    }
+
+    /**
+     * attribute function is used to represent the attributeFunction block in handlebar template.
+     * The attributeFunction block will be replaced by the returned attributeFunction list list.
+     * @return returns the attributeFunctionList in a node
+     */
+    public List<AttributeFunction> attributeFunction() {
+        return attributeFunctionList;
+    }
+    public SwitchFunction switchFunction(){
+        return switchFunction;
     }
 
     public static void main(String[] args) throws IOException {
@@ -92,7 +135,7 @@ public class FacadeGenerator {
                         Node immediateParent = Common.getImmediateParentNode(field.getType(), nodeList);
                         if (immediateParent != null && immediateParent.getName().equals(Constants.SYNTAX_TOKEN)) {
                             newField.setType(Constants.BL_TOKEN);
-                        } else if (field.getName().contains(Constants.LIST_KEYWORD)) {
+                        } else if (field.getType().equals(Constants.SYNTAX_LIST)) {
                             newField.setType(Constants.BL_LIST.replace(Constants.NODE_VARIABLE_PLACEHOLDER,
                                     Constants.BLNode));
                         } else {
@@ -116,9 +159,8 @@ public class FacadeGenerator {
                 if (field.getType().equals(Constants.BLNode)) {
                     attributeFunctionList.add(new AttributeFunction(Constants.BLNode, "node.childInBucket",
                             field.getName(), i, new CreateFacadeCall(i)));
-                } else if (field.getType().contains(Constants.LIST_KEYWORD)) {
-                    attributeFunctionList.add(new AttributeFunction("BLNodeList<BLNode>",
-                            "createListNode",
+                } else if (field.getType().equals("BLNodeList<BLNode>")) {
+                    attributeFunctionList.add(new AttributeFunction(field.getType(), "createListNode",
                             field.getName(), i));
                 } else {
                     attributeFunctionList.add(new AttributeFunction(Constants.BL_TOKEN, "createToken",
@@ -139,38 +181,5 @@ public class FacadeGenerator {
             }
             switchFunction = new SwitchFunction(caseList);
         }
-    }
-
-    static class SwitchFunction {
-        List<Case> caseList;
-        SwitchFunction(List<Case> caseList) {
-            this.caseList = caseList;
-        }
-    }
-
-    static class Case {
-         String name;
-         int index;
-         Case(String name, int index){
-             this.name = name;
-             this.index = index;
-         }
-    }
-
-    static class CreateFacadeCall {
-        int index;
-        CreateFacadeCall(int index) {
-            this.index = index;
-        }
-    }
-
-    public List<Field> attributes() {
-        return currentFieldList;
-    }
-    public List<AttributeFunction> attributeFunction() {
-        return attributeFunctionList;
-    }
-    public SwitchFunction switchFunction(){
-        return switchFunction;
     }
 }

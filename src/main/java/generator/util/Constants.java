@@ -36,6 +36,8 @@ public class Constants {
     public static final String BL_TOKEN = "BLSyntaxToken";
     public static final String BL_LIST = "BLNodeList<$variable>";
     public static final String BLNode = "BLNode";
+    public static final String SYNTAX_NODE = "SyntaxNode";
+    public static final String SYNTAX_LIST = "SyntaxList";
     public static final String FACADE_PACKAGE = "package generated.facade;";
     public static final String INTERNAL_PACKAGE = "package generated.internal;";
     public static final String INTERNAL_IMPORTS = "import generated.facade.*;";

@@ -37,11 +37,11 @@
       "fields": [
         {
           "name": "importList",
-          "type": "SyntaxNode"
+          "type": "SyntaxList"
         },
         {
           "name": "memberList",
-          "type": "SyntaxNode"
+          "type": "SyntaxList"
         },
         {
           "name": "eofToken",
@@ -90,7 +90,7 @@
         },
         {
           "name": "statementList",
-          "type": "SyntaxNode"
+          "type": "SyntaxList"
         },
         {
           "name": "closeBraceToken",

@@ -16,7 +16,6 @@ import java.util.Map;
 
 public class InternalGenerator {
 
-    private static List<Node> nodes;
     private static List<Field> currentFieldList;
     private static Bucket bucket;
     private static List<ChildNode> addChildNodeList;
@@ -24,7 +23,7 @@ public class InternalGenerator {
     private static FacadeClass facadeFunction;
 
     public static void main(String[] args) throws IOException {
-        nodes = Common.getTreeNodes();
+        List<Node> nodes = restructureNodes(Common.getTreeNodes());
         for (Node node : nodes) {
             MustacheFactory mf = new DefaultMustacheFactory();
             Mustache mustache = mf.compile("internalTemplate.mustache");
@@ -70,7 +69,35 @@ public class InternalGenerator {
             facadeFunction = null;
             currentFieldList = null;
             addChildNodeList = null;
+            bucket = null;
         }
+    }
+
+    private static List<Node> restructureNodes (List<Node> nodeList) {
+        List<Node> modifiedNodeList = new ArrayList<>();
+        nodeList.forEach(node -> {
+            Node modifiedNode = new Node();
+            modifiedNode.setType(node.getType());
+            modifiedNode.setName(node.getName());
+            modifiedNode.setBase(node.getBase());
+            if (node.getFields() != null) {
+                List<Field> modifiedFieldList = new ArrayList<>();
+                node.getFields().forEach(field -> {
+                    Field modifiedFiled = new Field();
+                    modifiedFiled.setName(field.getName());
+                    modifiedFiled.setDefaultValue(field.getDefaultValue());
+                    if (field.getType().equals("SyntaxList")) {
+                        modifiedFiled.setType(Constants.SYNTAX_NODE);
+                    } else {
+                        modifiedFiled.setType(field.getType());
+                    }
+                    modifiedFieldList.add(modifiedFiled);
+                });
+                modifiedNode.setFields(modifiedFieldList);
+            }
+            modifiedNodeList.add(modifiedNode);
+        });
+        return modifiedNodeList;
     }
 
     private static void populateChildNode() {
