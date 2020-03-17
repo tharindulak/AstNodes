@@ -448,10 +448,10 @@ public class ClassGeneratorTemplate {
             return "";
         } else if (nodeName.equals(Constants.SYNTAX_TRIVIA)) {
             returnStatement = Constants.RETURN_KEYWORD + Constants.WHITE_SPACE + fieldList.get(0).getName();
-        } else if (nodeName.equals(Constants.SYNTAX_TOKEN)) {
+        } else if (nodeName.equals(Constants.ST_TOKEN)) {
             returnStatement = Constants.RETURN_KEYWORD + Constants.WHITE_SPACE + Constants.LEADING_TRIVIA + Constants.CONCAT_SYMBOL
                     + Constants.KIND_PROPERTY + Constants.CONCAT_SYMBOL + Constants.TRAILING_TRIVIA;
-        } else if (nodeName.contains(Constants.TOKEN)) {
+        } else if (nodeName.contains(Constants.SYNTAX_LIST)) {
             returnStatement = Constants.RETURN_KEYWORD + Constants.WHITE_SPACE + Constants.LEADING_TRIVIA + Constants.CONCAT_SYMBOL
                     + Constants.PROPERTY + Constants.CONCAT_SYMBOL + Constants.TRAILING_TRIVIA;
         } else {

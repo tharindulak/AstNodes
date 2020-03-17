@@ -10,7 +10,7 @@ super(kind {{immediateParent}});
 {{#attributes}}this.{{name}} = {{name}};
 {{/attributes}}
 {{#bucket}}this.bucketCount = {{bucketCount}};
-this.childBuckets = new SyntaxNode[{{bucketCount}}];
+this.childBuckets = new STNode[{{bucketCount}}];
 {{/bucket}}
 {{#addChildNode}}this.addChildNode({{name}}, {{index}});
 {{/addChildNode}}
@@ -21,7 +21,7 @@ super(kind, width {{immediateParent}});
 {{#attributes}}this.{{name}} = {{name}};
 {{/attributes}}
 {{#bucket}}this.bucketCount = {{bucketCount}};
-this.childBuckets = new SyntaxNode[{{bucketCount}}];
+this.childBuckets = new STNode[{{bucketCount}}];
 {{/bucket}}
 {{#addChildNode}}this.addChildNode({{name}}, {{index}});
 {{/addChildNode}}
@@ -32,8 +32,8 @@ return leadingTrivia + {{kind}} + trailingTrivia;
 }
 {{/toStringFunction}}
 
-{{#facadeFunction}}public BLNode createFacade(int position, BLNonTerminalNode parent) {
-return new BL{{facadeClass}}(this, position, parent);
+{{#facadeFunction}}public Node createFacade(int position, NonTerminalNode parent) {
+return new {{facadeClass}}(this, position, parent);
 }
 {{/facadeFunction}}
 }

@@ -2,10 +2,10 @@
 {{imports}}
 
 public {{abstract}} class {{className}}{{type}} {{relationship}} {{parentClass}}{
-{{#attributes}}{{type}} {{name}};
+{{#attributes}}private {{type}} {{name}};
 {{/attributes}}
 
-public {{className}}(SyntaxNode node, int position, BLNonTerminalNode parent) {
+public {{className}}(STNode node, int position, NonTerminalNode parent) {
 super(node, position, parent);
 }
 
@@ -19,7 +19,7 @@ return {{name}};
 {{/attributeFunction}}
 
 {{#switchFunction}}
-public BLNode childInBucket(int bucket) {
+public Node childInBucket(int bucket) {
 switch (bucket) {
 {{#caseList}}
 case {{index}}:

@@ -35,17 +35,22 @@ public class InternalGenerator {
             currentFieldList = node.getFields();
             if (currentFieldList != null ) {
                 bucket = new Bucket(currentFieldList.size());
-                if (!node.getBase().equals(Constants.SYNTAX_TOKEN)) {
+                if (!node.getBase().equals(Constants.ST_TOKEN)) {
                     populateChildNode();
                 }
             }
-            if (!(node.getName().equals(Constants.SYNTAX_TOKEN) || node.getBase().equals(Constants.SYNTAX_TOKEN)) &&
-                    !node.getName().equals(Constants.MISSING_TOKEN)) {
-                populateToStringFunction(node);
+            if (node.getName().equals(Constants.ST_TOKEN) || node.getBase().equals(Constants.ST_TOKEN)) {
+                if (!node.getName().equals(Constants.MISSING_TOKEN)) {
+                    populateToStringFunction(node);
+                }
             }
+//            if (!(node.getName().equals(Constants.ST_TOKEN) || node.getBase().equals(Constants.ST_TOKEN)) &&
+//                    !node.getName().equals(Constants.MISSING_TOKEN)) {
+//                populateToStringFunction(node);
+//            }
             if (!((node.getType() != null) && (node.getType().equals(Constants.ABSTRACT_KEYWORD)))) {
-                if (!node.getBase().equals(Constants.SYNTAX_TOKEN) || node.getName().contains(Constants.SYNTAX_TOKEN)) {
-                    facadeFunction = new FacadeClass(node.getName());
+                if (!node.getBase().equals(Constants.ST_TOKEN) || node.getName().contains(Constants.ST_TOKEN)) {
+                    facadeFunction = new FacadeClass(node.getName().substring(2));
                 }
             }
             if (node.getBase() != null) {
@@ -78,20 +83,22 @@ public class InternalGenerator {
         nodeList.forEach(node -> {
             Node modifiedNode = new Node();
             modifiedNode.setType(node.getType());
-            modifiedNode.setName(node.getName());
-            modifiedNode.setBase(node.getBase());
+            modifiedNode.setName("ST" + node.getName());
+            modifiedNode.setBase("ST" + node.getBase());
             if (node.getFields() != null) {
                 List<Field> modifiedFieldList = new ArrayList<>();
                 node.getFields().forEach(field -> {
-                    Field modifiedFiled = new Field();
-                    modifiedFiled.setName(field.getName());
-                    modifiedFiled.setDefaultValue(field.getDefaultValue());
+                    Field modifiedField = new Field();
+                    modifiedField.setName(field.getName());
+                    modifiedField.setDefaultValue(field.getDefaultValue());
                     if (field.getType().equals("SyntaxList")) {
-                        modifiedFiled.setType(Constants.SYNTAX_NODE);
+                        modifiedField.setType(Constants.ST_NODE);
+                    } else if (field.getType().equals(Constants.TOKEN) || field.getType().equals(Constants.NODE)) {
+                        modifiedField.setType("ST" + field.getType());
                     } else {
-                        modifiedFiled.setType(field.getType());
+                        modifiedField.setType(field.getType());
                     }
-                    modifiedFieldList.add(modifiedFiled);
+                    modifiedFieldList.add(modifiedField);
                 });
                 modifiedNode.setFields(modifiedFieldList);
             }
@@ -110,9 +117,9 @@ public class InternalGenerator {
     }
 
     private static void populateToStringFunction(Node node) {
-        if (node.getName().equals(Constants.SYNTAX_TOKEN)) {
+        if (node.getName().equals(Constants.ST_TOKEN)) {
             toStringFunction = new ToStringFunction(Constants.KIND_PROPERTY);
-        } else if (node.getBase().equals(Constants.SYNTAX_TOKEN)) {
+        } else if (node.getBase().equals(Constants.ST_TOKEN)) {
             toStringFunction = new ToStringFunction(Constants.PROPERTY);
         }
     }

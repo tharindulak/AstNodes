@@ -1,5 +1,5 @@
 {
-  "root": "SyntaxNode",
+  "root": "Node",
   "type": "abstract",
   "fields": [
     {
@@ -13,27 +13,27 @@
   ],
   "node": [
     {
-      "name": "StatementNode",
+      "name": "Statement",
       "type": "abstract",
-      "base": "SyntaxNode"
+      "base": "Node"
     },
     {
-      "name": "SyntaxToken",
-      "base": "SyntaxNode",
+      "name": "Token",
+      "base": "Node",
       "fields": [
         {
           "name": "leadingTrivia",
-          "type": "SyntaxNode"
+          "type": "Node"
         },
         {
           "name": "trailingTrivia",
-          "type": "SyntaxNode"
+          "type": "Node"
         }
       ]
     },
     {
       "name": "ModulePart",
-      "base": "SyntaxNode",
+      "base": "Node",
       "fields": [
         {
           "name": "importList",
@@ -45,13 +45,178 @@
         },
         {
           "name": "eofToken",
-          "type": "SyntaxToken"
+          "type": "Token"
+        }
+      ]
+    },
+    {
+      "name": "AssignmentStatement",
+      "base": "Statement",
+      "fields": [
+        {
+          "name": "varRef",
+          "type": "Node"
+        },
+        {
+          "name": "equalsToken",
+          "type": "Node"
+        },
+        {
+          "name": "expr",
+          "type": "Node"
+        },
+        {
+          "name": "semicolonToken",
+          "type": "Node"
+        }
+      ]
+    },
+    {
+      "name": "Expression",
+      "type": "abstract",
+      "base": "Node"
+    },
+    {
+      "name": "BinaryExpression",
+      "base": "Expression",
+      "fields": [
+        {
+          "name": "lhsExpr",
+          "type": "Node"
+        },
+        {
+          "name": "operator",
+          "type": "Node"
+        },
+        {
+          "name": "rhsExpr",
+          "type": "Node"
+        }
+      ]
+    },
+    {
+      "name": "BracedExpression",
+      "base": "Expression",
+      "fields": [
+        {
+          "name": "openParen",
+          "type": "Token"
+        },
+        {
+          "name": "expression",
+          "type": "Node"
+        },
+        {
+          "name": "closeParam",
+          "type": "Token"
+        }
+      ]
+    },
+    {
+      "name": "Parameter",
+      "type": "abstract",
+      "base": "Node"
+    },
+    {
+      "name": "DefaultParameter",
+      "type": "abstract",
+      "base": "Parameter"
+    },
+    {
+      "name": "BracedExpression",
+      "base": "Expression",
+      "fields": [
+        {
+          "name": "leadingComma",
+          "type": "Token"
+        },
+        {
+          "name": "accessModifier",
+          "type": "Node"
+        },
+        {
+          "name": "type",
+          "type": "Node"
+        },
+        {
+          "name": "paramName",
+          "type": "Node"
+        },
+        {
+          "name": "equal",
+          "type": "Token"
+        },
+        {
+          "name": "expr",
+          "type": "Node"
+        }
+      ]
+    },
+    {
+      "name": "RequiredParameter",
+      "base": "Parameter",
+      "fields": [
+        {
+          "name": "leadingComma",
+          "type": "Token"
+        },
+        {
+          "name": "accessModifier",
+          "type": "Node"
+        },
+        {
+          "name": "type",
+          "type": "Node"
+        },
+        {
+          "name": "paramName",
+          "type": "Node"
+        }
+      ]
+    },
+    {
+      "name": "RestParameter",
+      "base": "Parameter",
+      "fields": [
+        {
+          "name": "leadingComma",
+          "type": "Token"
+        },
+        {
+          "name": "type",
+          "type": "Node"
+        },
+        {
+          "name": "ellipsis",
+          "type": "Node"
+        },
+        {
+          "name": "paramName",
+          "type": "Node"
+        }
+      ]
+    },
+    {
+      "name": "ReturnTypeDescriptor",
+      "base": "Node",
+      "fields": [
+        {
+          "name": "returnsKeyword",
+          "type": "Token"
+        },
+        {
+          "name": "annotation",
+          "type": "Node"
+        },
+        {
+          "name": "type",
+          "type": "Node"
         }
       ]
     },
     {
       "name": "LiteralValueToken",
-      "base": "SyntaxToken",
+      "base": "Token",
       "fields": [
         {
           "name": "text",
@@ -61,7 +226,7 @@
     },
     {
       "name": "IdentifierToken",
-      "base": "SyntaxToken",
+      "base": "Token",
       "fields": [
         {
           "name": "text",
@@ -71,7 +236,7 @@
     },
     {
       "name": "MissingToken",
-      "base": "SyntaxToken",
+      "base": "Token",
       "fields": [
         {
           "name": "IS_MISSING",
@@ -82,11 +247,11 @@
     },
     {
       "name": "BlockStatement",
-      "base": "StatementNode",
+      "base": "Statement",
       "fields": [
         {
           "name": "openBraceToken",
-          "type": "SyntaxToken"
+          "type": "Token"
         },
         {
           "name": "statementList",
@@ -94,69 +259,129 @@
         },
         {
           "name": "closeBraceToken",
-          "type": "SyntaxToken"
+          "type": "Token"
         }
       ]
     },
     {
-      "name": "LocalVariableDeclaration",
-      "base": "SyntaxNode",
+      "name": "ExternalFunctionBody",
+      "base": "Statement",
       "fields": [
         {
-          "name": "typeName",
-          "type": "SyntaxToken"
+          "name": "assign",
+          "type": "Node"
         },
         {
-          "name": "variableName",
-          "type": "SyntaxToken"
+          "name": "annotation",
+          "type": "Node"
         },
         {
-          "name": "equalsToken",
-          "type": "SyntaxToken"
+          "name": "externalKeyword",
+          "type": "Token"
         },
         {
-          "name": "initializer",
-          "type": "SyntaxNode"
-        },
-        {
-          "name": "semicolonToken",
-          "type": "SyntaxToken"
+          "name": "semicolon",
+          "type": "Token"
         }
       ]
     },
     {
       "name": "FunctionDefinition",
-      "base": "SyntaxNode",
+      "base": "Statement",
       "fields": [
         {
           "name": "visibilityQual",
-          "type": "SyntaxToken"
+          "type": "Node"
         },
         {
           "name": "functionKeyword",
-          "type": "SyntaxToken"
+          "type": "Token"
         },
         {
           "name": "functionName",
-          "type": "SyntaxToken"
+          "type": "Node"
         },
         {
           "name": "openParenToken",
-          "type": "SyntaxToken"
+          "type": "Token"
+        },
+        {
+          "name": "parameters",
+          "type": "SyntaxKind"
         },
         {
           "name": "closeParenToken",
-          "type": "SyntaxToken"
+          "type": "Token"
+        },
+        {
+          "name": "returnTypeDescriptor",
+          "type": "Node"
         },
         {
           "name": "functionBody",
-          "type": "SyntaxNode"
+          "type": "Node"
+        }
+      ]
+    },
+    {
+      "name": "LocalVariableDeclaration",
+      "base": "Node",
+      "fields": [
+        {
+          "name": "typeName",
+          "type": "Token"
+        },
+        {
+          "name": "variableName",
+          "type": "Token"
+        },
+        {
+          "name": "equalsToken",
+          "type": "Token"
+        },
+        {
+          "name": "initializer",
+          "type": "Node"
+        },
+        {
+          "name": "semicolonToken",
+          "type": "Token"
+        }
+      ]
+    },
+    {
+      "name": "FunctionDefinition",
+      "base": "Node",
+      "fields": [
+        {
+          "name": "visibilityQual",
+          "type": "Token"
+        },
+        {
+          "name": "functionKeyword",
+          "type": "Token"
+        },
+        {
+          "name": "functionName",
+          "type": "Token"
+        },
+        {
+          "name": "openParenToken",
+          "type": "Token"
+        },
+        {
+          "name": "closeParenToken",
+          "type": "Token"
+        },
+        {
+          "name": "functionBody",
+          "type": "Node"
         }
       ]
     },
     {
       "name": "ImportDeclaration",
-      "base": "SyntaxNode"
+      "base": "Node"
     }
   ]
 }

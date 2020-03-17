@@ -122,10 +122,10 @@ public class FacadeGenerator {
     private static List<Node> restructureNodes(List<Node> nodeList) {
         List<Node> modifiedNodeList = new ArrayList<>();
         for (Node node : nodeList) {
-            if (!(node.getBase().equals(Constants.SYNTAX_TOKEN)) || node.getName().equals(Constants.SYNTAX_TOKEN)) {
+            if (!(node.getBase().equals(Constants.TOKEN)) || node.getName().equals(Constants.TOKEN)) {
                 Node newNode = new Node();
                 newNode.setBase(Constants.NON_TERMINAL_NODE);
-                newNode.setName(Constants.BL + node.getName());
+                newNode.setName(node.getName());
                 newNode.setType(node.getType());
                 if (node.getFields() != null) {
                     List<Field> fields = new ArrayList<>();
@@ -133,13 +133,12 @@ public class FacadeGenerator {
                         Field newField = new Field();
                         newField.setName(field.getName());
                         Node immediateParent = Common.getImmediateParentNode(field.getType(), nodeList);
-                        if (immediateParent != null && immediateParent.getName().equals(Constants.SYNTAX_TOKEN)) {
-                            newField.setType(Constants.BL_TOKEN);
+                        if (immediateParent != null && immediateParent.getName().equals(Constants.ST_TOKEN)) {
+                            newField.setType(Constants.TOKEN);
                         } else if (field.getType().equals(Constants.SYNTAX_LIST)) {
-                            newField.setType(Constants.BL_LIST.replace(Constants.NODE_VARIABLE_PLACEHOLDER,
-                                    Constants.BLNode));
+                            newField.setType(Constants.NODE_LIST);
                         } else {
-                            newField.setType(Constants.BLNode);
+                            newField.setType(field.getType());
                         }
                         fields.add(newField);
                     }
@@ -156,14 +155,14 @@ public class FacadeGenerator {
             int i = 0;
             attributeFunctionList = new ArrayList<>();
             for (Field field : fieldList) {
-                if (field.getType().equals(Constants.BLNode)) {
-                    attributeFunctionList.add(new AttributeFunction(Constants.BLNode, "node.childInBucket",
+                if (field.getType().equals(Constants.NODE)) {
+                    attributeFunctionList.add(new AttributeFunction(Constants.NODE, "node.childInBucket",
                             field.getName(), i, new CreateFacadeCall(i)));
-                } else if (field.getType().equals("BLNodeList<BLNode>")) {
+                } else if (field.getType().equals("NodeList<Node>")) {
                     attributeFunctionList.add(new AttributeFunction(field.getType(), "createListNode",
                             field.getName(), i));
                 } else {
-                    attributeFunctionList.add(new AttributeFunction(Constants.BL_TOKEN, "createToken",
+                    attributeFunctionList.add(new AttributeFunction(Constants.TOKEN, "createToken",
                             field.getName(), i));
                 }
                 i++;
